@@ -45,14 +45,16 @@ FROM visibilityspots/jenkins-docker
 #    sh get-docker.sh && \
 USER root
 #RUN apt-get update && apt-get install -y docker-ce-cli && \
-RUN url=https://download.docker.com/linux/debian/dists/stretch/pool/stable/amd64/ && \
-    wget ${url}docker-ce-cli_19.03.1~3-0~debian-stretch_amd64.deb && \
-    url="https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" && \
-    curl -L $url -o /usr/local/bin/docker-compose && \
-    base=https://github.com/docker/machine/releases/download/v0.16.0 && \
-    curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine && \
-    install /tmp/docker-machine /usr/local/bin/docker-machine && \
-    docker-machine version;
+#RUN url=https://download.docker.com/linux/debian/dists/stretch/pool/stable/amd64/ && \
+#    wget ${url}docker-ce-cli_19.03.1~3-0~debian-stretch_amd64.deb && \
+WORKDIR /root/
+RUN url="https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" && \
+    curl -L $url -o /usr/local/bin/docker-compose
+#    && \
+#    base=https://github.com/docker/machine/releases/download/v0.16.0 && \
+#    curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine && \
+#    install /tmp/docker-machine /usr/local/bin/docker-machine && \
+#    docker --version && docker-compose --version && vdocker-machine version;
 
 #RUN sudo apt-get update && \
 #    sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common && \
